@@ -1,7 +1,7 @@
 import knex from './knexProducts.js';
 
 //---------- CLASE CON TENEDOR ------------
-export class Contenedor {
+class Contenedor {
 
     constructor(knex, table) {
           this.knex = knex;
@@ -66,5 +66,4 @@ async save(obj) {
     }
   }
 } 
-
-   
+export default Contenedor;

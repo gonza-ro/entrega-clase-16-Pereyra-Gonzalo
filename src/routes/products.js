@@ -1,6 +1,6 @@
 import express from 'express';
-import Contenedor from "../controllers/contenedor.js";
-import knexProducts from '../controllers/knexProducts.js';
+import Contenedor from '../controllers/contenedor.js';
+import knex from '../controllers/knexProducts.js';
 
 
 //---------- router ----------
@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 });
 
 //------CONTENEDOR -----
-let products = new Contenedor(knexProducts, 'products');
+let products = new Contenedor(knex, 'products');
 
 //------- RUTAS ------
 router.get('/', async (req, res, next) => {
@@ -75,7 +75,7 @@ router.post("/products", async (req, res, next) => {
 
 router.put("/products/:id", async (req, res, next) => {
   try {
-    const producto = await products
+    const producto = await productos
       .getById(Number(req.params.id))
       .then((res) => res);
     if (!producto) {

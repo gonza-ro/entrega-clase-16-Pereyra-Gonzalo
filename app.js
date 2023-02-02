@@ -1,18 +1,19 @@
 //=========== MODULOS ===========//
 import express from 'express';
-import apiProducts from './src/routes/products.js';
+// import apiProducts from '../routes/products.js';
 import fs from 'fs';
 import handlebars from 'express-handlebars';
 import path from 'path';
 import { Server } from 'socket.io';
-import Contenedor from './src/contorllers/contenedor.js';
+import Contenedor  from './src/controllers/contenedor.js';
 import Chat from './src/controllers/chat.js';
 import knexChat from './src/controllers/knexChat.js';
 import knexProducts from './src/controllers/knexProducts.js';
-import { knex } from 'knex';
-import dotenv from 'dotenv';
+import  knex  from 'knex';
+import products from './src/routes/products.js'
 
-dotenv.config();
+
+
 
 //=========== ROUTERS ===========//
 const app = express();
@@ -20,7 +21,7 @@ const app = express();
 //=========== MIDDLEWARES ===========//
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use('/', apiProducts);
+app.use('/', products);
 app.use('/', express.static(__dirname+'/public'))
 app.use((req, res, next) => {
     console.log(`Time: ${Date.now()}`)
@@ -42,11 +43,11 @@ app.set('view engine', 'handlebars');
 
 
 //=========== VARIABLES ===========//
-let products = new Contenedor(knexProducts, 'products');
+// let products = new Contenedor(knexProducts, 'products');
 let chat = new Chat(knexChat, 'messages');
 
 //=========== SERVIDOR ===========//
-const PORT = process.env.PORT||8080;
+const PORT = 8080;
 const server = app.listen(PORT, ()=> console.log(`Listening on ${PORT}`));
 
 //=========== SOCKET ===========//
@@ -80,3 +81,5 @@ io.on('connection', async (socket) => {
     
       });
 });
+
+export default app;

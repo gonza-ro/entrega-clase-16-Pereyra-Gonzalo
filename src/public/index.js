@@ -10,8 +10,9 @@ socket.on("products", (data) => {
   
   function render(data) {
     let html = data
-      .map((elem, index) => {
-        return `<tr>
+      .map((elem, index ) => {
+        //var datos =  console.log('|---> el index = '+elem+' -- '+ index)
+        return   `<tr>
       <td>${elem.title}</td>
       <td>${elem.price}</td>
       <td><img src="${elem.thumbnail}" alt="Imagen del producto" style="width: 4rem;"></td>
@@ -20,7 +21,8 @@ socket.on("products", (data) => {
       .join(" ");
     document.getElementById("tbproducts").innerHTML = html;
   }
-  
+  //console.log('|---> '+elem.title)
+  //console.log( datos );
   function renderMessages(data) {
     let html = data
       .map((elem, index) => {

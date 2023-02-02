@@ -1,6 +1,6 @@
-import dotenv from ('dotenv').config()
+//import dotenv from ('dotenv').config()
 
-export const knex = require('knex')({
+const knex = {
     client: 'mysql2',
     
     useNullAsDefault: true,
@@ -10,7 +10,7 @@ export const knex = require('knex')({
         user: 'root',
         password: '',
         database: 'listadeproductos'
-      
+    
     }
-})
-
+}
+export default knex
